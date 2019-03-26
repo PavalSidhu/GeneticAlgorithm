@@ -15,8 +15,11 @@ private:
     vector<City*> tours;
     double fitness;
 public:
+    Tour();
     Tour(vector<City*> cPoint);
     void calcFitness();
+    double getFitness();
+    vector<City*> getTour();
 };
 
 

@@ -1,10 +1,11 @@
 #include <iostream>
+#include <algorithm>
 
 #include "City.hpp"
 #include "Tour.hpp"
+#include "geneticAlgorithm.hpp"
 
-#include <iostream>
-#include <algorithm>
+
 
 #define CITIES_IN_TOUR 32
 #define POPULATION_SIZE 32
@@ -34,6 +35,12 @@ int main() {
         }
         tourList.emplace_back(cPoint);
     }
+
+
+    geneticAlgorithm g;
+    g.fittest(tourList);
+
+
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
