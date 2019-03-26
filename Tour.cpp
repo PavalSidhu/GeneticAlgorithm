@@ -17,6 +17,9 @@ void Tour::calcFitness() {
         double yDiff = abs(tours[i]->getY() - tours[i + 1]->getY());
         distance += sqrt((pow(xDiff, 2) + pow(yDiff, 2)));
     }
+    double xDiff = abs(tours[tours.size() - 1]->getX() - tours[0]->getX());
+    double yDiff = abs(tours[tours.size() - 1]->getY() - tours[0]->getY());
+    distance += sqrt((pow(xDiff, 2) + pow(yDiff, 2)));
     fitness = distance;
 }
 

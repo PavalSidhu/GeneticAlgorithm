@@ -10,6 +10,7 @@
 #include <vector>
 
 #define PARENT_POOL_SIZE 5
+#define MUTATION_RATE 15
 
 class geneticAlgorithm {
 private:
@@ -19,6 +20,8 @@ public:
     void fittest(vector<Tour> tours);
     void moveFront(vector<Tour> tours);
     void crossover(vector<Tour> tours);
+    void mutation(vector<Tour> tours);
+    void evaluation(vector<Tour> tours);
 };
 
 
