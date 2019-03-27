@@ -15,6 +15,7 @@
 class geneticAlgorithm {
 private:
     Tour elite;
+    double minDistance;
 public:
     geneticAlgorithm();
     void fittest(vector<Tour> tours);

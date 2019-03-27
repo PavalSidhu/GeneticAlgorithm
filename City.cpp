@@ -8,7 +8,6 @@ City::City(int city, int xCord, int yCord) {
     cName = city;
     x = xCord;
     y = yCord;
-    cout << cName << endl;
 }
 
 City::City(const City &city1) {
@@ -23,4 +22,8 @@ int City::getX() {
 
 int City::getY() {
     return y;
+}
+
+bool operator == (const City &c1, const City &c2) {
+    return c1.cName == c2.cName && c1.x == c2.x && c1.y == c2.y;
 }

@@ -9,6 +9,8 @@
 
 using namespace std;
 
+geneticAlgorithm::geneticAlgorithm() {}
+
 void geneticAlgorithm::fittest(vector<Tour> tours) {
     Tour minTour = tours[0];
     for(Tour t : tours) {
@@ -20,7 +22,6 @@ void geneticAlgorithm::fittest(vector<Tour> tours) {
 };
 
 void geneticAlgorithm::moveFront(vector<Tour> tours) {
-    fittest(tours);
     for(auto it = tours.begin(); it != tours.end(); ++it) {
         if(it->getFitness() == elite.getFitness()) {
             Tour eliteTour = *it;
@@ -33,38 +34,40 @@ void geneticAlgorithm::moveFront(vector<Tour> tours) {
 
 void geneticAlgorithm::crossover(vector<Tour> tours) {
     vector<Tour> subset;
-    Tour fitOne;
-    Tour fitTwo;
-    for(int i = 0; i < PARENT_POOL_SIZE; i++) {
-        int t = rand() % tours.size();
-        subset.emplace_back(tours[t]);
-    }
-    fittest(subset);
-    moveFront(subset);
-    fitOne = subset[0];
-    subset.erase(subset.begin());
-    fittest(subset);
-    moveFront(subset);
-    fitTwo = subset[0];
-    subset.erase(subset.begin());
-
-    int r = rand() % tours.size();
-    vector<City*> crossTour;
-
-    int k = 0;
     for(int i = 0; i < tours.size(); i++) {
-        if(i <= r) {
-            crossTour[i] = fitOne.getTour()[i];
-        } else {
-            if(find(crossTour.begin(), crossTour.end(), fitTwo.getTour()[k]) != crossTour.end()) {
-                k++;
-            } else {
-                crossTour[i] = fitTwo.getTour()[i];
-                k++;
-            }
+        Tour fitOne;
+        Tour fitTwo;
+        for(int i = 0; i < PARENT_POOL_SIZE; i++) {
+            int t = rand() % tours.size();
+            subset.emplace_back(tours[t]);
         }
-        Tour temp(crossTour);
-        tours[i] = temp;
+        moveFront(subset);
+        fitOne = subset[0];
+        vector<Tour> newsubset;
+        for (int j = 1; j < subset.size(); ++j) {
+            newsubset.emplace_back(subset[j]);
+        }
+        fittest(newsubset);
+        moveFront(newsubset);
+        fitTwo = newsubset[0];
+
+        int r = rand() % tours.size();
+        vector<City> crossTour;
+        int k = 0;
+        for(int i = 0; i < tours.size(); i++) {
+            if(i <= r) {
+                crossTour.emplace_back(*fitOne.getTour()[i]) ;
+            } else {
+                if(find(crossTour.begin(), crossTour.end(), (*fitTwo.getTour()[k])) != crossTour.end()) {
+                    k++;
+                } else {
+                    crossTour.emplace_back(*fitTwo.getTour()[k]);
+                    k++;
+                }
+            }
+            Tour temp(crossTour);
+            tours[i] = temp;
+        }
     }
 }
 
@@ -72,24 +75,31 @@ void geneticAlgorithm::mutation(vector<Tour> tours) {
     fittest(tours);
     moveFront(tours);
     for(int i = 1; i < tours.size(); i++) {
-        int r = rand() % 100;
+        for(int j = 0; j < tours.size(); j++) {
+            int r = rand() % 101;
             if(r < MUTATION_RATE) {
-                int j = rand();
-                if(i == tours.size()) {
-                    swap(tours[i], tours[i - 1]);
+                int j = rand() % 1;
+                if(i == tours.size()-1) {
+                    swap(tours[i].getTour()[j], tours[i].getTour()[j - 1]);
                 } else if(i == 0) {
-                    swap(tours[i], tours[i + 1]);
-                } else if(j == 0) {
-                    swap(tours[i], tours[i + 1]);
-                } else {
-                    swap(tours[i], tours[i - 1]);
+                    swap(tours[i].getTour()[j], tours[i].getTour()[j + 1]);
+                }else{
+                    if(j == 0) {
+                        swap(tours[i].getTour()[j], tours[i].getTour()[j + 1]);
+                    } else {
+                        swap(tours[i].getTour()[j], tours[i].getTour()[j - 1]);
+                    }
                 }
+
             }
+        }
     }
 }
 
 void geneticAlgorithm::evaluation(vector<Tour> tours) {
+    cout << "bye" << endl;
     for(int i = 0; i < tours.size(); i++) {
         tours[i].calcFitness();
+        cout << tours[i].getFitness() << endl;
     }
 }
