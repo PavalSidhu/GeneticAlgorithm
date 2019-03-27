@@ -97,9 +97,17 @@ void geneticAlgorithm::mutation(vector<Tour> tours) {
 }
 
 void geneticAlgorithm::evaluation(vector<Tour> tours) {
-    cout << "bye" << endl;
+    fittest(tours);
     for(int i = 0; i < tours.size(); i++) {
         tours[i].calcFitness();
         cout << tours[i].getFitness() << endl;
     }
+}
+
+void geneticAlgorithm::totalDistance(vector<Tour> tours) {
+    double distance = 0;
+    for(int i = 0; i < tours.size(); i++) {
+        distance += tours[i].getFitness();
+    }
+    cout << "The total distance for this iteration is: " << distance << endl;
 }

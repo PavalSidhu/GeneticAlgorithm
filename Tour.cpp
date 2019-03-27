@@ -7,8 +7,8 @@
 
 Tour::Tour(vector<City> cPoint) {
     for(int i = 0; i < cPoint.size(); ++i) {
-        City * city = new City(cPoint[i]);
-        this -> tours.emplace_back(city);
+        City* city = new City(cPoint[i]);
+        this-> tours.emplace_back(city);
     }
     this->fitness = calcFitness();
 }

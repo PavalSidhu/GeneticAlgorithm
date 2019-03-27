@@ -31,13 +31,15 @@ int main() {
         tourList.emplace_back(temp);
     }
 
-
-    geneticAlgorithm g;
-    g.fittest(tourList);
-    g.crossover(tourList);
-    g.mutation(tourList);
-    cout << "bye"<< endl;
-    g.evaluation(tourList);
+    for(int i = 0; i < ITERATIONS; ++i) {
+        cout << "Iteration number : " << i << endl;
+        geneticAlgorithm g;
+        g.fittest(tourList);
+        g.crossover(tourList);
+        g.mutation(tourList);
+        g.evaluation(tourList);
+        g.totalDistance(tourList);
+    }
 
     std::cout << "Hello, World!" << std::endl;
     return 0;
