@@ -16,7 +16,7 @@
 int main() {
     vector<City> masterList;
     double bestDistance = 1000000000;
-    double base;
+    double base = 0;
     Tour baseRoute;
     Tour bestRoute;
 
@@ -30,7 +30,7 @@ int main() {
 
     for(int i = 0; i < ITERATIONS; ++i) {
         vector<Tour> tourList;
-        for(int i = 0; i < POPULATION_SIZE; i++) {
+        for(int j = 0; j < POPULATION_SIZE; j++) {
             random_shuffle(masterList.begin(), masterList.end());
             Tour temp(masterList);
             tourList.emplace_back(temp);
