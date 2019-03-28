@@ -15,7 +15,7 @@
 
 int main() {
     vector<City> masterList;
-    double bestDistance = 1;
+    double bestDistance = 1000000000;
     double base;
     Tour baseRoute;
     Tour bestRoute;

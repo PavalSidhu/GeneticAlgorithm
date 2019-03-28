@@ -32,7 +32,6 @@ double Tour::calcFitness() {
     double xDiff = abs(tours[tours.size() - 1]->getX() - tours[0]->getX());
     double yDiff = abs(tours[tours.size() - 1]->getY() - tours[0]->getY());
     distance += sqrt((pow(xDiff, 2) + pow(yDiff, 2)));
-    distance = 1/distance * 100;
     return distance;
 }
 
