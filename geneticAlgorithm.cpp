@@ -100,15 +100,15 @@ void geneticAlgorithm::mutation(vector<Tour> tours) {
 
 void geneticAlgorithm::evaluation(vector<Tour> tours) {
     fittest(tours);
-    double elite = tours[0].getFitness();
+    bestDistance = tours[0].getFitness();
     for(int i = 0; i < tours.size(); i++) {
         tours[i].calcFitness();
-        if(elite > tours[i].getFitness()) {
-            elite = tours[i].getFitness();
+        if(bestDistance > tours[i].getFitness()) {
+            bestDistance = tours[i].getFitness();
         }
         cout << tours[i].getFitness() << endl;
     }
-    cout << "The shortest distance is " << elite << endl;
+    cout << "The shortest distance is " << bestDistance << endl;
 }
 
 void geneticAlgorithm::totalDistance(vector<Tour> tours) {
@@ -117,4 +117,12 @@ void geneticAlgorithm::totalDistance(vector<Tour> tours) {
         distance += tours[i].getFitness();
     }
     cout << "The total distance for this iteration is: " << distance << endl;
+}
+
+double geneticAlgorithm::getBestDistance() {
+    return bestDistance;
+}
+
+Tour geneticAlgorithm::getFittest() {
+    return elite;
 }

@@ -17,6 +17,7 @@ public:
     City(const City& city1);
     int getX();
     int getY();
+    int getName();
     friend bool operator == (const City &c1, const City &c2);
 };
 
