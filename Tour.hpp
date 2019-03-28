@@ -16,7 +16,7 @@ private:
     double fitness;
 public:
     Tour();
-    Tour(const Tour &t);
+    Tour(const Tour& t);
     Tour(vector<City> cPoint);
     double calcFitness();
     double getFitness();

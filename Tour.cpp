@@ -4,6 +4,9 @@
 
 #include "Tour.hpp"
 #include <cmath>
+#include <random>
+#include <algorithm>
+#include <iostream>
 
 Tour::Tour(vector<City> cPoint) {
     for(int i = 0; i < cPoint.size(); ++i) {

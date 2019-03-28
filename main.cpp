@@ -15,8 +15,6 @@
 
 int main() {
     vector<City> masterList;
-    vector<Tour> tourList;
-
 
     srand(time(nullptr));
     for(int i = 0; i < CITIES_IN_TOUR; i++) {
@@ -25,13 +23,14 @@ int main() {
         masterList.emplace_back(City(i, x, y));
     }
 
-    for(int i = 0; i < POPULATION_SIZE; i++) {
-        random_shuffle(masterList.begin(), masterList.end());
-        Tour temp(masterList);
-        tourList.emplace_back(temp);
-    }
 
     for(int i = 0; i < ITERATIONS; ++i) {
+        vector<Tour> tourList;
+        for(int i = 0; i < POPULATION_SIZE; i++) {
+            random_shuffle(masterList.begin(), masterList.end());
+            Tour temp(masterList);
+            tourList.emplace_back(temp);
+        }
         cout << "Iteration number : " << i << endl;
         geneticAlgorithm g;
         g.fittest(tourList);

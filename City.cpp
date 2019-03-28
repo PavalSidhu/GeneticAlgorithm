@@ -6,14 +6,14 @@
 
 City::City(int city, int xCord, int yCord) {
     cName = city;
-    x = xCord;
-    y = yCord;
+    this->x = xCord;
+    this->y = yCord;
 }
 
 City::City(const City &city1) {
-    cName = city1.cName;
-    x = city1.x;
-    y = city1.y;
+    this->cName = city1.cName;
+    this->x = city1.x;
+    this->y = city1.y;
 }
 
 int City::getX() {

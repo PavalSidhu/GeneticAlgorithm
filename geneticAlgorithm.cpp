@@ -14,6 +14,7 @@ geneticAlgorithm::geneticAlgorithm() {}
 void geneticAlgorithm::fittest(vector<Tour> tours) {
     Tour minTour = tours[0];
     for(Tour t : tours) {
+        t.calcFitness();
         if(t.getFitness() < minTour.getFitness()) {
             minTour = t;
         }
@@ -75,16 +76,16 @@ void geneticAlgorithm::mutation(vector<Tour> tours) {
     fittest(tours);
     moveFront(tours);
     for(int i = 1; i < tours.size(); i++) {
-        for(int j = 0; j < tours.size(); j++) {
-            int r = rand() % 101;
+        for(int j = 0; j < tours[i].getTour().size(); j++) {
+            auto r = rand() % 101;
             if(r < MUTATION_RATE) {
-                int j = rand() % 1;
-                if(i == tours.size()-1) {
+                auto b = rand() % 1;
+                if(j == tours[i].getTour().size()-1) {
                     swap(tours[i].getTour()[j], tours[i].getTour()[j - 1]);
-                } else if(i == 0) {
+                } else if(j == 0) {
                     swap(tours[i].getTour()[j], tours[i].getTour()[j + 1]);
                 }else{
-                    if(j == 0) {
+                    if(b == 0) {
                         swap(tours[i].getTour()[j], tours[i].getTour()[j + 1]);
                     } else {
                         swap(tours[i].getTour()[j], tours[i].getTour()[j - 1]);
@@ -94,14 +95,20 @@ void geneticAlgorithm::mutation(vector<Tour> tours) {
             }
         }
     }
+    moveFront(tours);
 }
 
 void geneticAlgorithm::evaluation(vector<Tour> tours) {
     fittest(tours);
+    double elite = tours[0].getFitness();
     for(int i = 0; i < tours.size(); i++) {
         tours[i].calcFitness();
+        if(elite > tours[i].getFitness()) {
+            elite = tours[i].getFitness();
+        }
         cout << tours[i].getFitness() << endl;
     }
+    cout << "The shortest distance is " << elite << endl;
 }
 
 void geneticAlgorithm::totalDistance(vector<Tour> tours) {
